@@ -1,0 +1,20 @@
+.card
+{
+    background-color:rgb(238, 212, 216);
+    border: 2px solid red; 
+}
+td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+table {
+    margin-top: 20px;
+  display:inline-table;
+    text-indent: initial;
+    border-spacing: 2px;
+  }
+  span
+  {
+      border:1px solid black;
+  }

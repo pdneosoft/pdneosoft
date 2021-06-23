@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-title>
+       
+      <h2> Add User</h2>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="adduser">
+
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Username" type="text" formControlName="username">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Password" formControlName="password">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <!-- <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="role" formControlName="role">
+                        </mat-form-field> -->
+
+                        <mat-form-field>
+                            <mat-label>Select Role</mat-label>
+                            <mat-select formControlName="role">
+                              <mat-option *ngFor="let role of rolelist" [value]="role">{{role}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </td>
+                    </tr>
+                    </table>
+                    <mat-dialog-actions align="end">
+                        <button mat-button mat-dialog-close mat-stroked-button color="royalblue">Cancel</button>
+                        <button mat-button  [disabled]="!adduser.valid"
+                        [mat-dialog-close]="true" mat-dialog-close mat-stroked-button color="royalblue" (click)="addUser()">Add</button>
+                      </mat-dialog-actions>
+            </form>
+        </mat-card-content>
+    </mat-card>

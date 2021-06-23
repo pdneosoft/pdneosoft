@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css'; */
+
+/* 
+@import '~ngx-toastr/toastr';
+@import '~ngx-toastr/toastr-bs4-alert';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert'; */
+@import '~ngx-toastr/toastr.css';
+.ngx-datatable .datatable-header .datatable-header-cell {
+    /* height: inherit; */
+    font-size: large;
+    color: black;
+}
+.ngx-datatable .datatable-header .datatable-header-cell {
+    /* height: inherit; */
+    font-size: large;
+    color: black;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(/assets/font/Montserrat/Montserrat-BlackItalic.ttf) format("truetype");
+    font-weight:300;
+  }
+  @font-face {
+    font-family: 'Backslash';  
+    src: url(/assets/font/backslash-font/Backslash-RpJol.otf) format("truetype");
+    font-weight:300;
+  }
+html, body { height: 100%; 
+overflow: hidden;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ngx-datatable.scroll-horz .datatable-body {
+  overflow: hidden;
+}
+datatable-scroller { width: 100% !important; }

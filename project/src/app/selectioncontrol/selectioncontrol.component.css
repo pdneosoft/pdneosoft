@@ -1,0 +1,32 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  button
+{
+    color:royalblue
+}
+
+mat-card-header
+{
+    display: flex;
+    color: royalblue;
+    font-family: 'Backslash';  
+    justify-content: center;
+    font-size: 20px;
+    padding:5px
+}
+.centerd{
+
+border: 2px solid royalblue;
+}
+
+.radiobuttonalign{
+  padding:5px;
+  /* border-bottom: 2px solid royalblue */
+}

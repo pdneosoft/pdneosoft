@@ -1,0 +1,332 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<mat-sidenav-container style="height:100%" class="example-container">
+    <mat-sidenav style="height:100% !important" class="example" #sidenav class="sidebar" mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+        <button mat-stroked-button style="margin: 10px;" color="primary" (click)="openDialogUser()" class="align">Add
+      User</button>
+        <div>
+            <button mat-stroked-button style="margin: 10px;" color="primary" (click)="openDialog()" class="centered">Add
+        Server Configuration
+      </button>
+        </div>
+        <div>
+            <button mat-stroked-button style="margin: 10px;" color="primary" (click)="openDialogSelectionControl()" class="centered">
+        Add
+        Selection Control
+      </button>
+        </div>
+        <div style="display: flex;
+    justify-content: flex-end;">
+
+            <button mat-button style="position: fixed;
+      bottom: 0;" (click)="logout()">
+
+        <mat-icon style="color:red; margin-bottom: 30px;
+        margin-right: 10px;" class="profileIcon" aria-hidden="false" aria-label="Example home icon">power_settings_new
+        </mat-icon>
+      </button>
+
+        </div>
+        <div style="display: flex;
+    justify-content: flex-start;">
+            <span style="position: fixed;
+ bottom: 0; color:green; margin-right:45px">
+        <mat-icon class="profileIcon" aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+      </span>
+            <div style="position: fixed;
+ bottom: 0; color:green; margin-left:50px;margin-bottom: 20px;"> {{username}} </div>
+
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-icon aria-hidden="false" style="color:white" aria-label="Example home icon" (click)="sidenav.toggle()">home
+        </mat-icon>
+        <div class="row">
+            <div class="col-md-3 col-md-3 col-lg-3 col-xs-2">
+                <h2>Server Configuration</h2>
+            </div>
+
+
+            <!-- <div class="col-md-6">
+        <input type="file" name="file" id="file" (change)="onChange($event)"
+          accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+          (click)="checkfileUpload()" >
+          <label for="file">
+            <img  src='assets/images/cameraicon.png' style="width:50%">
+          </label>
+        <button type="button" mat-raised-button color="primary" (click)="import()"> Upload File</button>
+      </div> -->
+
+
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+                <input type="file" name="file" id="file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,.numbers" class="inputfile" (change)="onChange($event)" />
+                <label for="file" class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
+          <mat-icon>file_upload</mat-icon> Choose a file
+
+        </label>
+
+                <p style="margin-top:-30px;text-align:end;margin-left:70px;color:white">{{fileName}}</p>
+            </div>
+            <!-- <p>{{fileName}</p> -->
+            <!-- <div class="col-md-1 col-sm-1" style="color:white"></div> -->
+            <div class="col-md-3">
+                <button type="submit" class="upload-btn" (click)="import()">
+          Upload
+        </button>
+            </div>
+
+            <div class="col-md-2 col-md-2 col-lg-2 col-xs-2">
+                <div class="input-group text-centers">
+                    <input #search id="search" type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
+
+                </div>
+            </div>
+        </div>
+        <div class="custom-datatable" style="margin: 15px;">
+            <ngx-datatable #mydatatable class="material responsive" [headerHeight]="50" [limit]="5" [rowHeight]="70" [columnMode]="ColumnMode.force" [scrollbarH]="true" [footerHeight]="50" [rows]="rows" style="width:100% im !important">
+                <!-- <ngx-datatable-column name="Selectors" prop="selectors">
+          <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+            <span title="Double click to edit" (dblclick)="editing[rowIndex + '-selectors'] = true">
+              {{value}}
+            </span>
+            <input autofocus (blur)="updateValue($event, 'selectors', rowIndex,row.id)"
+              *ngIf="editing[rowIndex + '-selectors']" type="text" [value]="value" />
+
+          </ng-template>
+        </ngx-datatable-column> -->
+                <ngx-datatable-column name="Camera" prop="cameras">
+                    <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-cameras'] = true">
+              {{value}}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'cameras', rowIndex,row.id)" *ngIf="editing[rowIndex + '-cameras']" type="text" [value]="value" />
+
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Max Data Rate(Mbps)" prop="max_data_rate">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-max_data_rate'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'max_data_rate', rowIndex,row.id)" *ngIf="editing[rowIndex + '-max_data_rate']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Display Rate(1080p)" prop="display_rate">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-display_rate'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'display_rate', rowIndex,row.id)" *ngIf="editing[rowIndex + '-display_rate']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Storage Range" prop="storage_range">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-storage_range'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'storage_range', rowIndex,row.id)" *ngIf="editing[rowIndex + '-storage_range']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="System" prop="system">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-system'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'system', rowIndex,row.id)" *ngIf="editing[rowIndex + '-system']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Category" prop="category">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-category'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'category', rowIndex,row.id)" *ngIf="editing[rowIndex + '-category']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="FF" prop="form_factor">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-form_factor'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'form_factor', rowIndex,row.id)" *ngIf="editing[rowIndex + '-form_factor']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="HDD slots" prop="hdd_slots">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-hdd_slots'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'hdd_slots', rowIndex,row.id)" *ngIf="editing[rowIndex + '-hdd_slots']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Availble Storage" prop="available_storage">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-available_storage'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'available_storage', rowIndex,row.id)" *ngIf="editing[rowIndex + '-available_storage']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Installed_HDDs " prop="installed_HDDs">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-installed_HDDs'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'installed_HDDs', rowIndex,row.id)" *ngIf="editing[rowIndex + '-installed_HDDs']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Storage_type " prop="storage_type">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-storage_type'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'storage_type', rowIndex,row.id)" *ngIf="editing[rowIndex + '-storage_type']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="HDD Size " prop="hdd_size">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-hdd_size'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'hdd_size', rowIndex,row.id)" *ngIf="editing[rowIndex + '-hdd_size']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="CPU" prop="cpu">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-cpu'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'cpu', rowIndex,row.id)" *ngIf="editing[rowIndex + '-cpu']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Ram" prop="ram">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-ram'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'ram', rowIndex,row.id)" *ngIf="editing[rowIndex + '-ram']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Video Type" prop="video_type">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-video_type'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'video_type', rowIndex,row.id)" *ngIf="editing[rowIndex + '-video_type']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Monitor Supported" prop="monitors_supported">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-monitors_supported'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'monitors_supported', rowIndex,row.id)" *ngIf="editing[rowIndex + '-monitors_supported']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Os Type" prop="os_type">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-os_type'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'os_type', rowIndex,row.id)" *ngIf="editing[rowIndex + '-os_type']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Os On Raid" prop="os_on_raid">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-os_on_raid'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'os_on_raid', rowIndex,row.id)" *ngIf="editing[rowIndex + '-os_on_raid']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="System Type" prop="system_type">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-system_type'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'system_type', rowIndex,row.id)" *ngIf="editing[rowIndex + '-system_type']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="NICs" prop="nics">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-nics'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'nics', rowIndex,row.id)" *ngIf="editing[rowIndex + '-nics']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Power Supply" prop="power_supply">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-power_supply'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'power_supply', rowIndex,row.id)" *ngIf="editing[rowIndex + '-power_supply']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Model" prop="model">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-model'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'model', rowIndex,row.id)" *ngIf="editing[rowIndex + '-model']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                option
+
+                <ngx-datatable-column name="Option" prop="option">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-option'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'option', rowIndex,row.id)" *ngIf="editing[rowIndex + '-option']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="Product code" prop="product_code">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-product_code'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'product_code', rowIndex,row.id)" *ngIf="editing[rowIndex + '-product_code']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Vicon Replacement" prop="vicon_replacement">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-vicon_replacement'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'vicon_replacement', rowIndex,row.id)" *ngIf="editing[rowIndex + '-vicon_replacement']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Vicon Model" prop="vicon_model">
+                    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-vicon_model'] = true">
+              {{ value }}
+            </span>
+                        <input autofocus (blur)="updateValue($event, 'vicon_model', rowIndex,row.id)" *ngIf="editing[rowIndex + '-vicon_model']" type="text" [value]="value" />
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </mat-sidenav-content>
+    <!-- </mat-drawer> -->
+</mat-sidenav-container>

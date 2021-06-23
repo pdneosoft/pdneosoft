@@ -1,0 +1,32 @@
+.demo-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.demo-full-width {
+    width: 100%;
+}
+
+mat-form-field {
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+button {
+    color: royalblue
+}
+
+.center {
+    display: flex;
+    color: royalblue;
+    font-family: 'Backslash';
+    justify-content: flex-starts;
+}
+
+.text-danger {
+    font-size: 10px;
+    padding-right: 5px;
+    margin-top: -12px;
+    margin-left: 18px;
+}

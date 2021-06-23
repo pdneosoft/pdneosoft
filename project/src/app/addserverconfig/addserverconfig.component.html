@@ -1,0 +1,408 @@
+<mat-card>
+    <form [formGroup]="addserverconfig">
+        <!-- <mat-card-title> -->
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <!-- <mat-form-field>
+                    <mat-label>Select Selector</mat-label>
+                    <mat-select formControlName="selector">
+                        <mat-option *ngFor="let selector of selctorlists" [value]="selector">{{selector}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+            </div>
+            <div class="col-md-8 col-sm-8 col-lg-8 center">
+                <!-- Add Server Configuration       -->
+                <h2 class="center">
+                    <mat-label>Add Server Configuration</mat-label>
+                </h2>
+            </div>
+        </div>
+        <!-- </mat-card-title> -->
+        <mat-card-content>
+
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Cameras" formControlName="cameras" (keypress)="numberOnly($event)">
+
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('cameras')?.hasError('required') && addserverconfig.get('cameras')?.touched">
+                            Cameras is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('cameras')?.hasError('pattern') && addserverconfig.get('cameras')?.touched">
+                            Please Enter Valid Cameras
+                        </div>
+
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Max Data Rate (Mbps)" formControlName="maxdatarate" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('maxdatarate')?.hasError('required') && addserverconfig.get('maxdatarate')?.touched">
+                            Max Data Rate (Mbps) is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('maxdatarate')?.hasError('pattern') && addserverconfig.get('maxdatarate')?.touched">
+                            Please Enter Valid Max Data Rate (Mbps)
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Display Rate" formControlName="displayrate" (keypress)="numberOnly($event)">
+
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('displayrate')?.hasError('required') && addserverconfig.get('displayrate')?.touched">
+                            Display Rate (Mbps) is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('displayrate')?.hasError('pattern') && addserverconfig.get('displayrate')?.touched">
+                            Please Enter Valid Display Rate
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Storage Range (TB)" formControlName="storagerange">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('storagerange')?.hasError('required') && addserverconfig.get('storagerange')?.touched">
+                            Storage Range (TB) is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('storagerange')?.hasError('pattern') && addserverconfig.get('storagerange')?.touched">
+                            Please Enter Valid Storage Range (TB)
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="System" formControlName="system">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('system')?.hasError('required') && addserverconfig.get('system')?.touched">
+                            System is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('system')?.hasError('pattern') && addserverconfig.get('system')?.touched">
+                            Please Enter Valid System
+                        </div>
+
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Category" formControlName="category">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('category')?.hasError('required') && addserverconfig.get('category')?.touched">
+                            Category is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('category')?.hasError('pattern') && addserverconfig.get('category')?.touched">
+                            Please Enter Valid Category
+                        </div>
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Form Factor" formControlName="ff">
+
+                        </mat-form-field>
+
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('ff')?.hasError('required') && addserverconfig.get('ff')?.touched">
+                            Form Factor is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('ff')?.hasError('pattern') && addserverconfig.get('ff')?.touched">
+                            Please Enter Valid Form Factor
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="HDD Slots" formControlName="hddslots" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('hddslots')?.hasError('required') && addserverconfig.get('hddslots')?.touched">
+                            HDD Slots is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('hddslots')?.hasError('pattern') && addserverconfig.get('hddslots')?.touched">
+                            Please Enter Valid HDD Slots
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Available Storage" formControlName="availablestorage" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('availablestorage')?.hasError('required') && addserverconfig.get('availablestorage')?.touched">
+                            Available Storage is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('availablestorage')?.hasError('pattern') && addserverconfig.get('availablestorage')?.touched">
+                            Please Enter Valid Available Storage
+                        </div>
+                        <!-- </mat-form-field> -->
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Installed HDDs" formControlName="installedHDDs" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('installedHDDs')?.hasError('required') && addserverconfig.get('installedHDDs')?.touched">
+                            Installed HDDs is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('installedHDDs')?.hasError('pattern') && addserverconfig.get('installedHDDs')?.touched">
+                            Please Enter Valid Installed HDDs
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Storage Type" formControlName="storagetype">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('storagetype')?.hasError('required') && addserverconfig.get('storagetype')?.touched">
+                            Storage Type is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('storagetype')?.hasError('pattern') && addserverconfig.get('storagetype')?.touched">
+                            Please Enter Valid Storage Type
+                        </div>
+
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+
+                            <input matInput placeholder="HDD Size " formControlName="HDDsize" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('HDDsize')?.hasError('required') && addserverconfig.get('HDDsize')?.touched">
+                            Installed HDDs is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('HDDsize')?.hasError('pattern') && addserverconfig.get('HDDsize')?.touched">
+                            Please Enter Valid Installed HDDs
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="CPU" formControlName="cpu">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('cpu')?.hasError('required') && addserverconfig.get('cpu')?.touched">
+                            CPU is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('cpu')?.hasError('pattern') && addserverconfig.get('cpu')?.touched">
+                            Please Enter Valid CPU
+                        </div>
+
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="RAM" formControlName="RAM">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('RAM')?.hasError('required') && addserverconfig.get('RAM')?.touched">
+                            RAM is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('RAM')?.hasError('pattern') && addserverconfig.get('RAM')?.touched">
+                            Please Enter Valid RAM
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Video Type" formControlName="videotype">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('videotype')?.hasError('required') && addserverconfig.get('videotype')?.touched">
+                            Video Type is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                            addserverconfig.get('videotype')?.hasError('pattern') && addserverconfig.get('videotype')?.touched">
+                            Please Enter Valid Video Type
+                        </div>
+
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Monitors Supported" formControlName="monitorssupported" (keypress)="numberOnly($event)">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('monitorssupported')?.hasError('required') && addserverconfig.get('monitorssupported')?.touched">
+                            Monitors Supported is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('monitorssupported')?.hasError('pattern') && addserverconfig.get('monitorssupported')?.touched">
+                            Please Enter Valid Monitors Supported
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="OS Type" formControlName="ostype">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('ostype')?.hasError('required') && addserverconfig.get('ostype')?.touched">
+                            OS Type is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('ostype')?.hasError('pattern') && addserverconfig.get('ostype')?.touched">
+                            Please Enter Valid OS Type
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="OS on RAID" formControlName="osonRAID">
+                        </mat-form-field>
+
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('osonRAID')?.hasError('required') && addserverconfig.get('osonRAID')?.touched">
+                            OS on RAID is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('osonRAID')?.hasError('pattern') && addserverconfig.get('osonRAID')?.touched">
+                            Please Enter Valid OS on RAID
+                        </div>
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="System Type" formControlName="systemType">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('systemType')?.hasError('required') && addserverconfig.get('systemType')?.touched">
+                            System Type is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('systemType')?.hasError('pattern') && addserverconfig.get('systemType')?.touched">
+                            Please Enter Valid System Type
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="NICs " formControlName="NICs" (keypress)="numberOnly($event)">
+
+                        </mat-form-field>
+
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('NICs')?.hasError('required') && addserverconfig.get('NICs')?.touched">
+                            NICs is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('NICs')?.hasError('pattern') && addserverconfig.get('NICs')?.touched">
+                            Please Enter Valid NICs
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Power Supply" formControlName="powersupply">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('powersupply')?.hasError('required') && addserverconfig.get('powersupply')?.touched">
+                            Power Supply is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('powersupply')?.hasError('pattern') && addserverconfig.get('powersupply')?.touched">
+                            Please Enter Valid Power Supply
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Model" formControlName="model">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('model')?.hasError('required') && addserverconfig.get('model')?.touched">
+                            Model is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('model')?.hasError('pattern') && addserverconfig.get('model')?.touched">
+                            Please Enter Valid Model
+                        </div>
+                    </td>
+
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Option" formControlName="option">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('option')?.hasError('required') && addserverconfig.get('option')?.touched">
+                            Option is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('option')?.hasError('pattern') && addserverconfig.get('option')?.touched">
+                            Please Enter Valid Option
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Product Code" formControlName="product_code">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('product_code')?.hasError('required') && addserverconfig.get('product_code')?.touched">
+                            Product Code is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('product_code')?.hasError('pattern') && addserverconfig.get('product_code')?.touched">
+                            Please Enter Valid Product Code
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Vicon Replacement" formControlName="viconreplacement">
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('viconreplacement')?.hasError('required') && addserverconfig.get('viconreplacement')?.touched">
+                            Vicon Replacement is required
+                        </div>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('viconreplacement')?.hasError('pattern') && addserverconfig.get('viconreplacement')?.touched">
+                            Please Enter Valid Vicon Replacement
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input matInput placeholder="Vicon Model" formControlName="viconmodel">
+
+                        </mat-form-field>
+                        <div class="text-danger" *ngIf="
+                        addserverconfig.get('viconmodel')?.hasError('required') && addserverconfig.get('viconmodel')?.touched">
+                            Vicon Model is required
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close mat-stroked-button color="royalblue">Cancel</button>
+                <button mat-button mat-dialog-close mat-stroked-button [disabled]="addserverconfig.invalid" color="royalblue" (click)="addconfiguration()">Add</button>
+            </mat-dialog-actions>
+        </mat-card-content>
+    </form>
+</mat-card>
